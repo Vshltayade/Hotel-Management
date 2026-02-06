@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Reservation</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+      integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+      integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- header and hero section -->
+    <main id="home">
+      <header>
+        <nav>
+          <div>
+            <a href="#">
+              <img
+                src="images/header/white-logo.png"
+                width="150px"
+                alt="logo"
+              />
+            </a>
+          </div>
+          <ul>
+            <li>
+              <a href="#home">Home</a>
+            </li>
+            <li>
+              <a href="#rooms">Rooms</a>
+            </li>
+            <li>
+              <a href="#services">Services</a>
+            </li>
+            <li>
+              <a href="#review">Review</a>
+            </li>
+            <li>
+              <a href="#about-me">About Me</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section class="hero">
+        <h1>Hotel Reservation</h1>
+        <h2>Book Online Now !</h2>
+        <div class="btn">
+          <a th:href="@{/new-reservation}">New Reservation</a>
+          <a th:href="@{/your-reservations}">Your Reservations</a>
+          <br /><br /><br /><br />
+          <a th:href="@{/logout}">Sign Out</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- rooms and suite section -->
+    <section id="rooms">
+      <h2 class="s-heading">Hotel Rooms and Suites</h2>
+      <div class="rooms-type">
+        <div class="row">
+          <div class="col">
+            <div class="card" style="padding: 10px">
+              <h3>Single Room:</h3>
+              <img
+                src="images/rooms/single.jpg"
+                alt="single-room"
+                width="420px"
+              />
+              <p class="rooms-para">
+                Single Room <br />
+                with free breakfast for one person or two start from $500 for
+                night up to $1999.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="col">
+              <div class="card" style="padding: 10px">
+                <h3>Double Room:</h3>
+                <img
+                  src="images/rooms/family.jpg"
+                  alt="double-room"
+                  width="420px"
+                />
+                <p class="rooms-para">
+                  Double Room <br />
+                  with free breakfast for three persons or four start from $1000
+                  for night up to $2999.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="col">
+              <div class="card" style="padding: 10px">
+                <h3>Family Room:</h3>
+                <img
+                  src="images/rooms/double.jpg"
+                  alt="family-room"
+                  width="420px"
+                />
+                <p class="rooms-para">
+                  Family Room <br />
+                  with free breakfast for four persons or five start from $1300
+                  for night up to $3299.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="col">
+              <div class="card" style="padding: 10px">
+                <h3>Honeymoon Suite:</h3>
+                <img
+                  src="images/rooms/suite.jpg"
+                  alt="honeymoon-suite"
+                  width="420px"
+                />
+                <p class="rooms-para">
+                  Honeymoon Suite <br />
+                  with breakfast and ready for any surprises and customized
+                  equipment and start from $1000 for night up to $4999.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- services -->
+    <section id="services">
+      <h2 class="s-heading">Our facilities and services</h2>
+      <div class="services-types">
+        <div class="service">
+          <img src="images/service/bell.png" alt="bell" />
+          <div>
+            <p>Room Service</p>
+            <p>Enjoy your stay with excellent and timely room service</p>
+          </div>
+        </div>
+        <div class="service">
+          <img src="images/service/coffee.png" alt="coffee" />
+          <div>
+            <p>Free Breakfast</p>
+            <p>Enjoy Free breakfast every morning</p>
+          </div>
+        </div>
+      </div>
+      <div class="services-types">
+        <div class="service">
+          <img src="images/service/car-front.jpg" alt="car-front" />
+          <div>
+            <p>Free Parking</p>
+            <p>No need to pay any extra charges to park your vehicle</p>
+          </div>
+        </div>
+        <div class="service">
+          <img src="images/service/spa.png" alt="spa" />
+          <div>
+            <p>Free Spa</p>
+            <p>Relax at the inhouse Spa once every day of your stay</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- reviews -->
+    <section id="review">
+      <h2 class="s-heading">Hotel Review</h2>
+      <div class="slider">
+        <div class="slide">
+          <img src="images/slide/one.jpg" alt="one"/>
+        </div>
+        <div class="slide">
+          <img src="images/slide/two.jpg" alt="two"/>
+        </div>
+        <div class="slide">
+          <img
+            src="images/slide/three.jpg" alt="three"/>
+        </div>
+        <div class="slide">
+          <img
+            src="images/slide/four.jpg" alt="four"/>
+        </div>
+        <div class="slide">
+          <img
+            src="images/slide/five.jpg" alt="five"/>
+        </div>
+        <div class="slide">
+          <img src="images/slide/six.jpg" alt="six"/>
+        </div>
+        <div class="slide">
+          <img
+            src="images/slide/seven.jpg" alt="seven"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- about me -->
+    <footer id="about-me">
+      <div>
+        <div class="about">
+          <h2>About Me</h2>
+          <p>Vishal Tayade</p>
+        </div>
+        <div class="social">
+          <h2>Social Links</h2>
+          <div class="link">
+            <a href="https://github.com/Vshltayade" target="_blank">
+              <img src="images/footer/github.png" alt="github" />
+            </a>
+            <p>Github Account</p>
+          </div>
+          <div class="link">
+            <a href="https://www.linkedin.com/in/vishal-tayade-0211111a5/" target="_blank">
+              <img src="images/footer/linkedIn.png" alt="linkedIn" />
+            </a>
+            <p>LinkedIn Account</p>
+          </div>
+        </div>
+        <div class="contact">
+          <h2>Contact</h2>
+          <div>
+            <a href="https://maps.app.goo.gl/jUr9NahHFdDw8jKW9" target="_blank">
+              <img src="images/footer/location.png" alt="location" />
+            </a>
+            <p>India</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            Copyright ©2024 All rights reserved |
+            <span>Developed By: Vishal Tayade</span>
+          </div>
+          <div>
+            <a>Hotel Reservation</a> | <a>Hotel Reservation</a> |
+            <a>Mr. Vishal Tayade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+      integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script th:src="@{/script/index.js}"></script>
+  </body>
+</html>
+  

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    
+    <div class="container1" id="container">
+      
+      <div class="form-container sign-up-container">
+        
+        <form method="post" id="regForm" name="regForm" th:action="@{/registration-process}" th:object="${newUser}">
+
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+          <h1>Sign Up</h1>
+
+          <div class="social-container">
+            <a href="https://www.linkedin.com/in/vishal-tayade-0211111a5/" target="_blank" class="social"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Vshltayade" target="_blank" class="social"><i class="fab fa-github"></i></a>
+          </div>
+
+          <!-- Check for registration error -->
+          <div th:if="${registrationError}" id="reg-error" class="alert alert-danger col-xs-offset-1 col-xs-10">
+            <span th:text="${registrationError}"></span>
+          </div>
+
+          <!-- Check for registration success -->
+          <div th:if="${registrationSuccess}" id="reg-success" class="alert alert-success col-xs-offset-1 col-xs-10">
+            <span th:text="${registrationSuccess}"></span>
+          </div>
+
+          <p>Create new account</p>
+
+			<!-- email -->
+          <input type="email" placeholder="Email" th:field="*{email}"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" th:errorclass="fieldError" required />
+
+          <div th:if="${#fields.hasErrors('email')}"
+            style="margin-bottom: 25px" class="text-danger">
+            <ul>
+              <li th:each="err : ${#fields.errors('email')}"
+                th:text="'Email :' + ${err}" ></li>
+            </ul>
+          </div>
+
+			<!-- username -->
+          <input type="text" placeholder="Username" th:field="*{username}"
+              pattern="[A-Za-z0-9]{1,20}" th:errorclass="fieldError" required />
+
+          <div th:if="${#fields.hasErrors('username')}"
+            style="margin-bottom: 25px" class="text-danger">
+            <ul>
+              <li th:each="err : ${#fields.errors('n')}"
+                th:text="'User name :' + ${err}" ></li>
+            </ul>
+          </div>
+
+			<!-- password -->
+          <input id="password" name="password" type="password"
+              pattern="^\S{6,}$" placeholder="Password" required
+              th:field="*{password}" th:errorclass="fieldError"
+              onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" />
+
+          <div th:if="${#fields.hasErrors('password')}"
+            style="margin-bottom: 25px" class="text-danger">
+            <ul>
+              <li th:each="err : ${#fields.errors('password')}"
+                th:text="'Password :' + ${err}" ></li>
+            </ul>
+          </div>
+
+			<!-- match password -->
+          <input id="password_two" name="password_two" type="password"
+              pattern="^\S{6,}$" placeholder="Verify Password"
+              th:field="*{matchingPassword}" th:errorclass="fieldError" required
+              onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Password does not match :' :'' );" />
+
+          <div th:if="${#fields.hasErrors('matchingPassword')}"
+            style="margin-bottom: 25px" class="text-danger">
+            <ul>
+              <li th:each="err : ${#fields.errors('matchingPassword')}"
+                th:text="'Password Verify:' + ${err}" />
+            </ul>
+          </div>
+
+          <br>
+
+          <button class="button" id="button" >Submit</button>
+
+        </form>
+      
+      </div>
+
+
+
+
+      <div class="form-container sign-in-container">
+        <form id="regForm" name="regForm" th:action="@{/login-process}"
+            method="POST">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    
+          <h1>Sign In</h1>
+    
+          <div class="social-container">
+            <a href="https://www.linkedin.com/in/jankipatel8/" target="_blank" class="social"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/jankipatel1065"
+               target="_blank" class="social"><i class="fab fa-github"></i></a>
+    
+          </div>
+    
+          <!-- Login Error -->
+          <div th:if="${param.error}" id="param-error"
+             class="alert alert-danger col-xs-offset-1 col-xs-10">Invalid
+            username or password.</div>
+    
+          <!-- Logout notify -->
+          <div th:if="${param.logout}" id="param-logout"
+             class="alert alert-success col-xs-offset-1 col-xs-10">You
+            have been logged out.</div>
+    
+          <p>You have account? sign in now!</p> 
+
+          <input type="email" placeholder="Email" name="username" required />
+    
+          <input type="password" placeholder="Password" name="password"
+               required /> <br>
+    
+          <button class="button" id="button">Submit</button>
+        </form>
+      </div>
+
+<!-- switch overlay -->
+<div class="overlay-container">
+  <div class="overlay">
+
+    <!-- sign in switch -->
+    <div class="overlay-panel overlay-left">
+      <h1>Have Account?</h1>
+      <p>SIGN IN NOW</p>
+      <button class="ghost button" id="signIn">Sign In</button>
+    </div>
+
+    <!-- sign up switch -->
+    <div class="overlay-panel overlay-right">
+      <h1>Don't Have Account?</h1>
+      <p>SIGN UP NOW</p>
+      <button class="ghost button" id="signUp">Sign Up</button>
+    </div>
+  </div>
+</div>
+    
+    </div>
+  
+
+    <script th:src="@{/script/login.js}"></script>
+    
+  </body>
+</html>

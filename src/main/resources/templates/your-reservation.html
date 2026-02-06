@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Reservation</title>
+    <link rel="stylesheet" th:href="@{/css/your-reservation.css}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- header and hero section -->
+    <main id="home">
+      <header>
+        <nav>
+          <div>
+            <a th:href="@{/}">
+              <img
+                th:src="@{/images/header/white-logo.png}"
+                width="150px"
+                alt="logo"
+              />
+            </a>
+          </div>
+          <ul>
+            <li>
+              <a href="#home">Your Reservations</a>
+            </li>
+            <li>
+              <a href="#user-res">Reservations List</a>
+            </li>
+            <li>
+              <a href="#about-me">About Me</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section class="hero">
+        <h1>Your Reservations</h1>
+        <div class="btn1">
+          <a th:href="@{/new-reservation}">New Reservation</a>
+          <br /><br /><br />
+          <a th:href="@{/}">Back Home</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Reservations Table Section -->
+    <section class="container">
+      <h2 class="sub-title" id="user-res">User Reservations</h2>
+      <h2 class="re-lis-h2">Reservation List</h2>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-dark table-striped">
+          <!-- thead Table elements -->
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Res ID</th>
+              <th scope="col">Room</th>
+              <th scope="col">Rooms</th>
+              <th scope="col">Persons</th>
+              <th scope="col">Children</th>
+              <th scope="col">Open Buffet</th>
+              <th scope="col">Stay Period</th>
+              <th scope="col">Arrival Date</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <!-- loop in each reservation in list and fill table -->
+          <tbody>
+            <tr th:each="tempRes : ${resList}">
+              <td class="text-center" th:text="${tempRes.id}"></td>
+              <td class="text-center" th:text="${tempRes.room}"></td>
+              <td class="text-center" th:text="${tempRes.numOfRooms}"></td>
+              <td class="text-center" th:text="${tempRes.numOfPersons}"></td>
+              <td class="text-center" th:text="${tempRes.numOfChildren}"></td>
+              <td class="text-center" th:text="${tempRes.openBuffet}"></td>
+              <td class="text-center" th:text="${tempRes.stayDays}"></td>
+              <td
+                class="text-center"
+                th:text="${tempRes.arrivalDate}"
+                id="arr_str"
+              ></td>
+              <td class="text-center" th:text="${tempRes.price}"></td>
+              <td class="text-center">
+                <!-- Update and Delete buttons -->
+                <div class="btn-group" role="group">
+                  <form
+                    class="m-1"
+                    th:action="@{/reservation-update}"
+                    method="POST"
+                  >
+                    <input
+                      type="hidden"
+                      name="${_csrf.parameterName}"
+                      value="${_csrf.token}"
+                    />
+                    <input
+                      type="hidden"
+                      name="resId"
+                      th:value="${tempRes.id}"
+                    />
+                    <button type="submit" class="btn btn-info p-1 text-light" style="font-size: 13px">
+                      Update
+                    </button>
+                  </form>
+                  <form
+                    class="m-1"
+                    th:action="@{/reservation-delete}"
+                    method="POST"
+                  >
+                    <input
+                      type="hidden"
+                      name="${_csrf.parameterName}"
+                      value="${_csrf.token}"
+                    />
+                    <input
+                      type="hidden"
+                      name="resId"
+                      th:value="${tempRes.id}"
+                    />
+                    <button
+                      type="submit"
+                      class="btn btn-danger p-1"
+                       style="font-size: 13px"
+                      onclick="return confirm('Are you sure you want to delete this Reservation?')"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- about me -->
+    <footer id="about-me">
+      <div>
+        <div class="about">
+          <h2>About Me</h2>
+          <p>Vishal Tayade</p>
+        </div>
+        <div class="social">
+          <h2>Social Links</h2>
+          <div class="link">
+            <a href="https://github.com/Vshltayade">
+              <img th:src="@{/images/footer/github.png}" alt="github" />
+            </a>
+            <p>Github Account</p>
+          </div>
+          <div class="link">
+            <a href="https://www.linkedin.com/in/vishal-tayade-0211111a5/">
+              <img th:src="@{/images/footer/linkedIn.png}" alt="linkedIn" />
+            </a>
+            <p>LinkedIn Account</p>
+          </div>
+        </div>
+        <div class="contact">
+          <h2>Contact</h2>
+          <div>
+            <a href="https://maps.app.goo.gl/jUr9NahHFdDw8jKW9" target="_blank">
+              <img th:src="@{/images/footer/location.png}" alt="location" />
+            </a>
+            <p>India</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            Copyright ©2024 All rights reserved |
+            <span>Developed By: Vishal Tayade</span>
+          </div>
+          <div>
+            <a>Hotel Reservation</a> | <a>Hotel Reservation</a> |
+            <a>Mr. Vishal Tayade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script th:src="@{/script/reservation.js}"></script>
+  </body>
+</html>
